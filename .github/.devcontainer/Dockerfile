@@ -1,6 +1,7 @@
 FROM ghcr.io/nam20485/dotnet-prebuild:main-latest
 
 RUN npm config set fund false --global
+
 RUN npm install -g @github/copilot
 RUN npm install -g @google/gemini-cli@preview
 RUN curl -fsSL https://claude.ai/install.sh | bash -s latest
