@@ -18,5 +18,4 @@ RUN curl -fsSL https://opencode.ai/install | bash
 RUN copilot --version && \
     gemini --version && \
     claude --version && \
-    qwen --version && \
-    opencode --version
+    qwen --version
