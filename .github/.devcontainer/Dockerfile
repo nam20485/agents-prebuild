@@ -10,11 +10,9 @@ RUN curl -fsSL https://opencode.ai/install | bash
 # install jetbrains rider backend
 # install jb gateway
 # install jetbrains toolbox
-
 # run vs code server
+#RUN curl -fsSL https://raw.githubusercontent.com/abhilashiig/kiro-ide-linux-installation/main/clone-and-install-kiro.sh | bash -s -- --user
 
-
-# install kiro code editor
 RUN copilot --version && \
     gemini --version && \
     claude --version && \
