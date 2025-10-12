@@ -3,7 +3,9 @@ FROM ghcr.io/nam20485/dotnet-prebuild:main-latest
 # Base image already runs as vscode user with shell completions configured
 # We just need to continue as that user for our additional installations
 USER vscode
-RUN npm config set fund false --global
+
+# Configure npm for vscode user (no --global flag needed, user-level config)
+RUN npm config set fund false
 
 # Install AI CLI tools globally for vscode user
 RUN npm install -g @github/copilot && \
