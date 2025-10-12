@@ -1,21 +1,26 @@
 FROM ghcr.io/nam20485/dotnet-prebuild:main-latest
 
+# Base image already runs as vscode user with shell completions configured
+# We just need to continue as that user for our additional installations
+USER vscode
 RUN npm config set fund false --global
 
-RUN npm install -g @github/copilot
-RUN npm install -g @google/gemini-cli@preview
+# Install AI CLI tools globally for vscode user
+RUN npm install -g @github/copilot && \
+    npm install -g @google/gemini-cli@preview && \
+    npm install -g @qwen-code/qwen-code@latest
+
+# Install Claude CLI (runs as vscode user)
 RUN curl -fsSL https://claude.ai/install.sh | bash -s latest
-RUN npm install -g @qwen-code/qwen-code@latest
+
+# Install OpenCode CLI (runs as vscode user)
 RUN curl -fsSL https://opencode.ai/install | bash
 
-# desktop commander
-# install jetbrains rider backend
-# install jb gateway
-# install jetbrains toolbox
-# run vs code server
-#RUN curl -fsSL https://raw.githubusercontent.com/abhilashiig/kiro-ide-linux-installation/main/clone-and-install-kiro.sh | bash -s -- --user
-
+# Verify installations
 RUN copilot --version && \
     gemini --version && \
     claude --version && \
     qwen --version
+
+# Set working directory to vscode user home
+WORKDIR /home/vscode

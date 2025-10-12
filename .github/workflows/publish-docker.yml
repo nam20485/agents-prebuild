@@ -124,12 +124,3 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
-
-      # Clean up old cache entries to prevent hitting GitHub cache limits
-      - name: Clean up cache
-        if: github.event_name != 'pull_request'
-        continue-on-error: true
-        run: |
-          # GitHub Actions cache is limited to 10GB per repo
-          # This step helps manage cache size by cleaning old entries
-          echo "Cache cleanup completed - GitHub manages cache retention automatically"
