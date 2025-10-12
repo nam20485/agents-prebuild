@@ -7,10 +7,10 @@ USER vscode
 # Disable npm funding messages for this user (applies to all npm operations including -g installs)
 RUN npm config set fund false
 
-# Install AI CLI tools globally for vscode user
-RUN npm install -g @github/copilot && \
-    npm install -g @google/gemini-cli@preview && \
-    npm install -g @qwen-code/qwen-code@latest
+# Install AI CLI tools globally (using sudo since vscode user has sudoers access)
+RUN sudo npm install -g @github/copilot && \
+    sudo npm install -g @google/gemini-cli@preview && \
+    sudo npm install -g @qwen-code/qwen-code@latest
 
 # Install Claude CLI (runs as vscode user)
 RUN curl -fsSL https://claude.ai/install.sh | bash -s latest
