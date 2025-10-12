@@ -4,7 +4,7 @@ FROM ghcr.io/nam20485/dotnet-prebuild:main-latest
 # We just need to continue as that user for our additional installations
 USER vscode
 
-# Configure npm for vscode user (no --global flag needed, user-level config)
+# Disable npm funding messages for this user (applies to all npm operations including -g installs)
 RUN npm config set fund false
 
 # Install AI CLI tools globally for vscode user
